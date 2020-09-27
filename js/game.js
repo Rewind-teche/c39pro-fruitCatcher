@@ -82,6 +82,7 @@ class Game{
             
                  if (frameCount % 20 === 0) {
                      fruits = createSprite(random(100, 1000), 0, 100, 100);
+                     fruits.y = 0
                      fruits.velocityY = 6;
                      var rand = Math.round(random(1,5));
                      switch(rand){
@@ -96,24 +97,28 @@ class Game{
                          case 5: fruits.addImage("fruit1", fruit5_img);
                          break;
                      }
-                     fruitGroup.add(fruits);
+                    fruitGroup.add(fruits)
                      
                  }
                  
-                  if (player.index !== null && fruitGroup.isTouching(players)) {
+                  if (player.index !== null ) 
+                  {
                      //fill code here, to destroy the objects.
-                     
-                       fruitGroup.removeSprites();
+                     for(var i =0; i< fruitGroup.length; i++)
+                     {
+                        if(fruitGroup.get(i).isTouching(players))
+                        {
+                            fruitGroup.get(i).destroy();
+                           
+                            player.update();
+                        }
+                     }
                     
                   }
                 
 
          
-         
-        
-         
-
-    }
+         }
 
     end(){
        console.log("Game Ended");
